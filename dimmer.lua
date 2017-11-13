@@ -7,7 +7,7 @@
 --]]
 
 if (fibaro:countScenes() > 1) then
-  fibaro:abort()
+  fibaro:abort();
 end
 
 --your dimmer ID
@@ -18,20 +18,33 @@ while true do
 sunrise = fibaro:getValue(1, "sunriseHour");
 sunset = fibaro:getValue(1, "sunsetHour");
   
-
-
+  
 for token in string.gmatch(sunrise, "([^:]*)") do
   if(tonumber(token)) then
-   if(sunriseHours and (not sunriseMin)) then sunriseMin=tonumber(token); end
-   if( not sunriseHours) then sunriseHours=tonumber(token); end
-end
+      
+   if(sunriseHours and (not sunriseMin)) then 
+        sunriseMin=tonumber(token); 
+   end
+      
+   if(not sunriseHours) then 
+        sunriseHours=tonumber(token); 
+   end
+      
+  end
 end
 
 for token in string.gmatch(sunset, "([^:]*)") do
   if(tonumber(token)) then
-   if(sunsetHours and (not sunsetMin)) then sunsetMin=tonumber(token); end
-   if( not sunsetHours) then sunsetHours=tonumber(token); end
-end
+      
+   if(sunsetHours and (not sunsetMin)) then 
+        sunsetMin=tonumber(token); 
+   end
+      
+   if(not sunsetHours) then 
+        sunsetHours=tonumber(token); 
+   end
+      
+  end
 end
 
 --fibaro:debug('Sunrise: ' .. sunriseHours .. ':' .. sunriseMin);
@@ -62,6 +75,6 @@ if((hours>sunriseHours and hours<sunsetHours) or (hours==sunriseHours and sunris
   
 end
   --run every minute
-  fibaro:sleep(60000)
+  fibaro:sleep(60000);
 end
 
